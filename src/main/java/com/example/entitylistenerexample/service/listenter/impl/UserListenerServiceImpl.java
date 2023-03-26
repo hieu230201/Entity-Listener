@@ -34,7 +34,7 @@ public class UserListenerServiceImpl {
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void update (UserEntity entity) {
-        UserEntity previousState  = entity.getPreviousState();
+        UserEntity previousState  = entity.getPreviousState(); // dùng để debug xem entity trước khi được lưu
         UserListenerEntity listenerEntity = new UserListenerEntity();
         listenerEntity.setAddress(entity.getAddress());
         listenerEntity.setAge(entity.getAge());
