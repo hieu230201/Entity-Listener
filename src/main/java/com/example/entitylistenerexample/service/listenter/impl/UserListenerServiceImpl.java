@@ -35,10 +35,16 @@ public class UserListenerServiceImpl {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void update (UserEntity entity) {
         UserEntity previousState  = entity.getPreviousState(); // dùng để debug xem entity trước khi được lưu
-        UserListenerEntity listenerEntity = new UserListenerEntity();
+        UserListenerEntity listenerEntity = userListenerRepo.findById(entity.getId()).get();
         listenerEntity.setAddress(entity.getAddress());
         listenerEntity.setAge(entity.getAge());
         listenerEntity.setName(entity.getName());
         userListenerRepo.save(listenerEntity);
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void delete (UserEntity entity) {
+        UserEntity previousState  = entity.getPreviousState(); // dùng để debug xem entity trước bị xoá
+        userListenerRepo.deleteById(entity.getId());
     }
 }

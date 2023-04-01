@@ -42,4 +42,13 @@ public class CrudUserApi {
         return "Update User success";
     }
 
+    @DeleteMapping("/delete")
+    public String delete (@RequestParam Long id) {
+        if (id != null) {
+            UserEntity userEntity = userRepo.findById(id).get();
+            userRepo.delete(userEntity);
+        }
+        return "Delete User success";
+    }
+
 }

@@ -4,6 +4,7 @@ import com.example.entitylistenerexample.entity.UserEntity;
 import com.example.entitylistenerexample.service.listenter.impl.UserListenerServiceImpl;
 import com.example.entitylistenerexample.until.ApplicationContextHolder;
 import jakarta.persistence.PostPersist;
+import jakarta.persistence.PostRemove;
 import jakarta.persistence.PostUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -27,5 +28,11 @@ public class UserLister {
     public void afterUpdateUser (UserEntity userEntity) {
         UserListenerServiceImpl service = ApplicationContextHolder.getContext().getBean(UserListenerServiceImpl.class);
         service.update(userEntity);
+    }
+
+    @PostRemove
+    public void afterDeleteUser (UserEntity userEntity) {
+        UserListenerServiceImpl service = ApplicationContextHolder.getContext().getBean(UserListenerServiceImpl.class);
+        service.delete(userEntity);
     }
 }
